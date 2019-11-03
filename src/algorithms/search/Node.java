@@ -7,7 +7,7 @@ public class Node {
     public Node(int[][] puzzle) {
         this.grid = puzzle;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         Node that = (Node) obj;
