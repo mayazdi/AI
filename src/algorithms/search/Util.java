@@ -6,8 +6,7 @@ enum Direction {
 
 class Node {
     int[][] grid;
-    int blankX;
-    int blankY;
+    int blankX, blankY;
 
     public Node(int Size) {
         grid = new int[Size][Size];
@@ -16,29 +15,39 @@ class Node {
 
 public class Util {
     //goal State
+    int Goal [][];
+
+    public Util(){
+        Goal = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 0}};
+    }
 
     public void NextStates(Node node) {
+        Node n1, n2, n3, n4;
         if (isValid(node, Direction.Down)) {
-            node.grid[node.blankX][node.blankY] = node.grid[node.blankX][node.blankY + 1];
-            node.blankY = node.blankY + 1;
-            node.grid[node.blankX][node.blankY] = 0;
+            n1 = node;
+            n1.grid[n1.blankX][n1.blankY] = n1.grid[n1.blankX][n1.blankY + 1];
+            n1.blankY = n1.blankY + 1;
+            n1.grid[n1.blankX][n1.blankY] = 0;
         }
         if (isValid(node, Direction.Up)) {
-            node.grid[node.blankX][node.blankY] = node.grid[node.blankX][node.blankY - 1];
-            node.blankY = node.blankY - 1;
-            node.grid[node.blankX][node.blankY] = 0;
+            n2 = node;
+            n2.grid[n2.blankX][n2.blankY] = n2.grid[n2.blankX][n2.blankY - 1];
+            n2.blankY = n2.blankY - 1;
+            n2.grid[n2.blankX][n2.blankY] = 0;
 
         }
         if (isValid(node, Direction.Right)) {
-            node.grid[node.blankX][node.blankY] = node.grid[node.blankX + 1][node.blankY];
-            node.blankX = node.blankX + 1;
-            node.grid[node.blankX][node.blankY] = 0;
+            n3 = node;
+            n3.grid[n3.blankX][n3.blankY] = n3.grid[n3.blankX + 1][n3.blankY];
+            n3.blankX = n3.blankX + 1;
+            n3.grid[n3.blankX][n3.blankY] = 0;
 
         }
         if (isValid(node, Direction.Left)) {
-            node.grid[node.blankX][node.blankY] = node.grid[node.blankX - 1][node.blankY];
-            node.blankX = node.blankX - 1;
-            node.grid[node.blankX][node.blankY] = 0;
+            n4 = node;
+            n4.grid[n4.blankX][n4.blankY] = n4.grid[n4.blankX - 1][n4.blankY];
+            n4.blankX = n4.blankX - 1;
+            n4.grid[n4.blankX][n4.blankY] = 0;
         }
 
 
