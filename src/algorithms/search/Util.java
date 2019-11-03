@@ -5,22 +5,46 @@ enum Direction {
 }
 
 class Node {
-    int[][] State;
+    int[][] grid;
     int blankX;
     int blankY;
 
     public Node(int Size) {
-        State = new int[Size][Size];
+        grid = new int[Size][Size];
     }
 }
 
 public class Util {
+    //goal State
+
     public void NextStates(Node node) {
-        Node no
+        if (isValid(node, Direction.Down)) {
+            node.grid[node.blankX][node.blankY] = node.grid[node.blankX][node.blankY + 1];
+            node.blankY = node.blankY + 1;
+            node.grid[node.blankX][node.blankY] = 0;
+        }
+        if (isValid(node, Direction.Up)) {
+            node.grid[node.blankX][node.blankY] = node.grid[node.blankX][node.blankY - 1];
+            node.blankY = node.blankY - 1;
+            node.grid[node.blankX][node.blankY] = 0;
+
+        }
+        if (isValid(node, Direction.Right)) {
+            node.grid[node.blankX][node.blankY] = node.grid[node.blankX + 1][node.blankY];
+            node.blankX = node.blankX + 1;
+            node.grid[node.blankX][node.blankY] = 0;
+
+        }
+        if (isValid(node, Direction.Left)) {
+            node.grid[node.blankX][node.blankY] = node.grid[node.blankX - 1][node.blankY];
+            node.blankX = node.blankX - 1;
+            node.grid[node.blankX][node.blankY] = 0;
+        }
+
 
     }
 
-    private boolean isValid(Node node, Direction direction){
+    private boolean isValid(Node node, Direction direction) {
         boolean Valid = true;
         if (node.blankX == 0 && direction == Direction.Left)
             Valid = false;
