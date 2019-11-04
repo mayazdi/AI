@@ -4,6 +4,8 @@ public class Node {
     int[][] grid;
     int blankX, blankY;
 
+    Node parent;
+    Direction move;
     public Node(int[][] puzzle) {
         this.grid = puzzle;
     }
