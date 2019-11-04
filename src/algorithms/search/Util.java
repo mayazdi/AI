@@ -2,20 +2,20 @@ package algorithms.search;
 
 import java.util.ArrayList;
 
-enum Direction {
-    Right, Left, Up, Down
-}
+
 
 
 public class Util {
     //goal State
-    int Goal [][];
+    public static Node Goal;
+    int Final [][];
 
     public Util(){
-        Goal = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 0}};
+        Final = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 0}};
+        Goal = new Node(Final);
     }
 
-    public ArrayList<Node> NextStates(Node node) {
+    public static ArrayList<Node> NextStates(Node node) {
         ArrayList<Node> available = new ArrayList<>();
         Node n1, n2, n3, n4;
         if (isValid(node, Direction.Down)) {
@@ -49,7 +49,7 @@ public class Util {
         return available;
     }
 
-    private boolean isValid(Node node, Direction direction) {
+    private static boolean isValid(Node node, Direction direction) {
         boolean Valid = true;
         if (node.blankX == 0 && direction == Direction.Left)
             Valid = false;
