@@ -23,16 +23,18 @@ public class BFS implements Algorithm {
         ArrayList<Node> nextStates = Util.NextStates(initialNode);
         queue.poll();
         for (Node state : nextStates) {
+            //state.toString();
             if (!Visited.contains(state))
                 Visited.add(state);
-            if (!state.equals(Util.Goal))
+            if (!state.equals(Util.Goal)){
                 queue.add(state);
+            }
             else break;
 
         }
 
         Node head = queue.poll();
-        while (head.equals(initialNode)) {
+        while (!head.equals(initialNode)) {
             path.add(head.move);
             head = head.parent;
         }
@@ -48,13 +50,14 @@ public class BFS implements Algorithm {
     @Override
     public String makeMove(String[][] grid) {
         if (first) {
+            Util u = new Util();
             path = new ArrayList<>();
 
-            int emptyX, emptyY;
+            int emptyX = 0, emptyY = 0;
             int initialGrid[][] = new int[3][3];
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
-                    if (grid[i][j].equals(' ')) {
+                    if (grid[i][j].equals(" ")) {
                         emptyX = i;
                         emptyY = j;
                         initialGrid[i][j] = 0;
@@ -63,7 +66,8 @@ public class BFS implements Algorithm {
                     initialGrid[i][j] = Integer.parseInt(grid[i][j]);
                 }
             }
-            initialNode = new Node(initialGrid);
+            initialNode = new Node(initialGrid, emptyX, emptyY);
+            initialNode.toString();
             path = generatePath();
 
             first = false;
