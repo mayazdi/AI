@@ -27,6 +27,7 @@ public class Util {
                 moved.grid[moved.blankX + 1][moved.blankY] = 0;
                 moved.parent = node;
                 moved.blankX++;
+                moved.move = Direction.Down;
                 break;
             case Up:
                 moved = new Node(puzzle, node.blankX, node.blankY);
@@ -34,6 +35,7 @@ public class Util {
                 moved.grid[moved.blankX - 1][moved.blankY] = 0;
                 moved.parent = node;
                 moved.blankX--;
+                moved.move = Direction.Up;
                 break;
             case Right:
                 moved = new Node(puzzle, node.blankX, node.blankY);
@@ -41,6 +43,7 @@ public class Util {
                 moved.grid[moved.blankX][moved.blankY + 1] = 0;
                 moved.parent = node;
                 moved.blankY++;
+                moved.move = Direction.Right;
                 break;
             case Left:
                 moved = new Node(puzzle, node.blankX, node.blankY);
@@ -48,6 +51,7 @@ public class Util {
                 moved.grid[moved.blankX][moved.blankY - 1] = 0;
                 moved.parent = node;
                 moved.blankY--;
+                moved.move = Direction.Left;
                 break;
         }
 
@@ -60,30 +64,19 @@ public class Util {
         if (isValid(node, Direction.Down)) {
             n1 = move(node, Direction.Down);
             available.add(n1);
-//            n1.toString();
-//            System.out.println("Down");
         }
         if (isValid(node, Direction.Up)) {
             n2 = move(node, Direction.Up);
             available.add(n2);
-//            n2.toString();
-//            System.out.println("Up");
         }
         if (isValid(node, Direction.Right)) {
             n3 = move(node, Direction.Right);
             available.add(n3);
-//            n3.toString();
-//            System.out.println("Right");
         }
         if (isValid(node, Direction.Left)) {
             n4 = move(node, Direction.Left);
             available.add(n4);
-//            n4.toString();
-//            System.out.println("Left");
         }
-        /*for (Node nd: available){
-            nd.toString();
-        }*/
         return available;
     }
 

@@ -9,7 +9,6 @@ public class Node {
     Node parent;
     Direction move;
 
-
     public Node(int[][] puzzle, int emptyX, int emptyY) {
         this.grid = puzzle;
         this.blankX = emptyX;

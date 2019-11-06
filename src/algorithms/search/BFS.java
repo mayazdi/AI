@@ -2,39 +2,31 @@ package algorithms.search;
 
 import algorithms.Algorithm;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-
+import java.util.*;
 
 public class BFS implements Algorithm {
     private boolean first = true;
     private Node initialNode;
-    private static ArrayList<Direction> path;
+    private static Stack<Direction> path;
 
-    private ArrayList<Direction> generatePath() {
-
+    private Stack<Direction> generatePath() {
         HashSet<Node> Visited = new HashSet<>();
-
         if (initialNode.equals(Util.Goal))
             return null;
         Queue<Node> queue = new LinkedList<>();
-
+        Node head = null;
         ArrayList<Node> nextStates = Util.NextStates(initialNode);
-        //queue.poll();
         boolean found = false;
         queue.add(initialNode);
-        while(!queue.isEmpty()){
-            System.out.println(Visited.size());
+        while (!queue.isEmpty()) {
             for (Node state : nextStates) {
-                state.toString();
                 if (Visited.contains(state))
                     continue;
                 Visited.add(state);
                 queue.add(state);
                 if (state.equals(Util.Goal)) {
                     System.out.println("Found!");
+                    head = state;
                     found = true;
                     break;
                 }
@@ -43,25 +35,19 @@ public class BFS implements Algorithm {
             nextStates = Util.NextStates(((LinkedList<Node>) queue).pollFirst());
         }
 
-        Node head = queue.poll();
         while (!head.equals(initialNode)) {
-            path.add(head.move);
+            path.push(head.move);
             head = head.parent;
         }
 
         return path;
-
-        //start from head of queue,
-        //while current node is not the initial grid
-        // do -> node = node.parent
-        //add current move to path
     }
 
     @Override
     public String makeMove(String[][] grid) {
         if (first) {
             Util u = new Util();
-            path = new ArrayList<>();
+            path = new Stack<>();
 
             int emptyX = 0, emptyY = 0;
             int initialGrid[][] = new int[3][3];
@@ -84,7 +70,7 @@ public class BFS implements Algorithm {
         }
 
         if (!path.isEmpty()) {
-            switch (path.get(0)) {
+            switch (path.pop()) {
                 case Up:
                     return "Up";
                 case Down:
