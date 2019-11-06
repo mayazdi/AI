@@ -4,8 +4,7 @@ import java.util.Arrays;
 
 public class Node {
     int[][] grid;
-    int blankX, blankY;
-
+    int blankX, blankY, depth = 0;
     Node parent;
     Direction move;
 

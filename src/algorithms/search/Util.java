@@ -61,20 +61,25 @@ public class Util {
     public static ArrayList<Node> NextStates(Node node) {
         ArrayList<Node> available = new ArrayList<>();
         Node n1, n2, n3, n4;
+        int depth = node.depth + 1;
         if (isValid(node, Direction.Down)) {
             n1 = move(node, Direction.Down);
+            n1.depth = depth;
             available.add(n1);
         }
         if (isValid(node, Direction.Up)) {
             n2 = move(node, Direction.Up);
+            n2.depth = depth;
             available.add(n2);
         }
         if (isValid(node, Direction.Right)) {
             n3 = move(node, Direction.Right);
+            n3.depth = depth;
             available.add(n3);
         }
         if (isValid(node, Direction.Left)) {
             n4 = move(node, Direction.Left);
+            n4.depth = depth;
             available.add(n4);
         }
         return available;
