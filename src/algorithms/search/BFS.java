@@ -23,21 +23,24 @@ public class BFS implements Algorithm {
 
         ArrayList<Node> nextStates = Util.NextStates(initialNode);
         //queue.poll();
+        boolean found = false;
         queue.add(initialNode);
         while(!queue.isEmpty()){
             System.out.println(Visited.size());
             for (Node state : nextStates) {
+                state.toString();
                 if (Visited.contains(state))
                     continue;
                 Visited.add(state);
                 queue.add(state);
                 if (state.equals(Util.Goal)) {
                     System.out.println("Found!");
+                    found = true;
                     break;
                 }
             }
+            if (found) break;
             nextStates = Util.NextStates(((LinkedList<Node>) queue).pollFirst());
-
         }
 
         Node head = queue.poll();
