@@ -58,6 +58,19 @@ public class Util {
         return moved;
     }
 
+    private static int heuristicFunc(int[][] grid) {
+        int sum = 0;
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                int value = grid[x][y];
+                if (value != 0) {
+                    sum += Math.abs(x - ((value - 1) / 3)) + Math.abs(y - ((value - 1) % 3));
+                }
+            }
+        }
+        return sum;
+    }
+
     public static ArrayList<Node> NextStates(Node node) {
         ArrayList<Node> available = new ArrayList<>();
         Node n1, n2, n3, n4;
@@ -65,21 +78,25 @@ public class Util {
         if (isValid(node, Direction.Down)) {
             n1 = move(node, Direction.Down);
             n1.depth = depth;
+            n1.f = depth + heuristicFunc(n1.grid);
             available.add(n1);
         }
         if (isValid(node, Direction.Up)) {
             n2 = move(node, Direction.Up);
             n2.depth = depth;
+            n2.f = depth + heuristicFunc(n2.grid);
             available.add(n2);
         }
         if (isValid(node, Direction.Right)) {
             n3 = move(node, Direction.Right);
             n3.depth = depth;
+            n3.f = depth + heuristicFunc(n3.grid);
             available.add(n3);
         }
         if (isValid(node, Direction.Left)) {
             n4 = move(node, Direction.Left);
             n4.depth = depth;
+            n4.f = depth + heuristicFunc(n4.grid);
             available.add(n4);
         }
         return available;

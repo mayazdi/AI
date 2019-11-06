@@ -4,6 +4,7 @@ import algorithms.Algorithm;
 
 import java.util.*;
 
+@SuppressWarnings("ALL")
 public class BFS implements Algorithm {
     private boolean first = true;
     private Node initialNode;

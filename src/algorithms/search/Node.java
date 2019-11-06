@@ -2,9 +2,9 @@ package algorithms.search;
 
 import java.util.Arrays;
 
-public class Node {
+public class Node implements Comparable{
     int[][] grid;
-    int blankX, blankY, depth = 0;
+    int f, blankX, blankY, depth = 0;
     Node parent;
     Direction move;
 
@@ -38,5 +38,10 @@ public class Node {
                     return false;
         return true;
 
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.f - ((Node) o).f;
     }
 }
