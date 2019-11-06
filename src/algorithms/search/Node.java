@@ -1,5 +1,7 @@
 package algorithms.search;
 
+import java.util.Arrays;
+
 public class Node {
     int[][] grid;
     int blankX, blankY;
@@ -20,6 +22,11 @@ public class Node {
             System.out.println(this.grid[i][0] + " " + this.grid[i][1] + " " + this.grid[i][2]);
         System.out.println();
         return null;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(grid);
     }
 
     @Override

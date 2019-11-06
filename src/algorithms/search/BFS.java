@@ -3,6 +3,7 @@ package algorithms.search;
 import algorithms.Algorithm;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -14,22 +15,28 @@ public class BFS implements Algorithm {
 
     private ArrayList<Direction> generatePath() {
 
-        ArrayList<Node> Visited = new ArrayList<>();
+        HashSet<Node> Visited = new HashSet<>();
 
         if (initialNode.equals(Util.Goal))
             return null;
         Queue<Node> queue = new LinkedList<>();
 
         ArrayList<Node> nextStates = Util.NextStates(initialNode);
-        queue.poll();
-        for (Node state : nextStates) {
-            //state.toString();
-            if (!Visited.contains(state))
+        //queue.poll();
+        queue.add(initialNode);
+        while(!queue.isEmpty()){
+            System.out.println(Visited.size());
+            for (Node state : nextStates) {
+                if (Visited.contains(state))
+                    continue;
                 Visited.add(state);
-            if (!state.equals(Util.Goal)){
                 queue.add(state);
+                if (state.equals(Util.Goal)) {
+                    System.out.println("Found!");
+                    break;
+                }
             }
-            else break;
+            nextStates = Util.NextStates(((LinkedList<Node>) queue).pollFirst());
 
         }
 
